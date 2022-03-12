@@ -1,9 +1,9 @@
 declare interface Task {
-  createdAt: string
+  createdAt?: Date
   description: string
-  id: string
+  id?: string
   status?: string
   title: string
-  updateAt: string
-  userId: string
+  updateAt?: Ate
+  userId?: string
 }
