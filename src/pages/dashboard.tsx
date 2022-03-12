@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client"
 import { Task } from "@prisma/client"
 import React from "react"
-import { NexusGenObjects } from "../../node_modules/@types/nexus-typegen"
 
 const Dashboard = () => {
   const allTasks = gql`
@@ -14,7 +13,7 @@ const Dashboard = () => {
       }
     }
   `
-  const { data, loading, error } = useQuery<{ tasks: NexusGenObjects["Task"][] }>(allTasks)
+  const { data, loading, error } = useQuery<{ tasks: Task[] }>(allTasks)
 
   return (
     <>
