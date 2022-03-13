@@ -1,19 +1,25 @@
-import React from "react"
+import { AddTaskModal } from "components/add-task-modal"
+import React, { useState } from "react"
 import styled from "styled-components"
 
 export const Header = () => {
+  const [showModal, setShowModal] = useState(false)
+
   return (
-    <Container>
-      <h1>Task Manager</h1>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <AddTask>Add Task</AddTask>
-        <span style={{ display: "flex" }}>
-          Logged in as:{" "}
-          <strong style={{ textDecoration: "underline", marginLeft: "5px" }}>Username</strong>
-        </span>
-        <Button>Log In</Button>
-      </div>
-    </Container>
+    <>
+      <Container>
+        <h1>Task Manager</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <AddTask onClick={() => setShowModal(true)}>Add Task</AddTask>
+          <span style={{ display: "flex" }}>
+            Logged in as:{" "}
+            <strong style={{ textDecoration: "underline", marginLeft: "5px" }}>Username</strong>
+          </span>
+          <Button>Log In</Button>
+        </div>
+      </Container>
+      <AddTaskModal showModal={showModal} setShowModal={setShowModal} />
+    </>
   )
 }
 
