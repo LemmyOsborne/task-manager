@@ -37,7 +37,14 @@ model Task {
   description String
   user        User?    @relation(fields: [userId], references: [id])
   userId      String
-  status      String
+  status      Status   @default(TODO)
+}
+
+enum Status {
+  TODO
+  INPROGRESS
+  REVIEW
+  DONE
 }
 
 model Account {

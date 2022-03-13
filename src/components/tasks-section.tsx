@@ -12,8 +12,14 @@ export const TasksSection: React.FC<Props> = ({ title, tasks }) => {
     <Container>
       <Header>{title}</Header>
       <Body>
-        {tasks.map(({ id, title, description }) => (
-          <TaskComponent key={id} id={id} title={title} description={description} />
+        {tasks?.map(({ id, title, description, createdAt }) => (
+          <TaskComponent
+            key={id}
+            id={id}
+            title={title}
+            description={description}
+            createdAt={createdAt}
+          />
         ))}
       </Body>
     </Container>
@@ -21,13 +27,17 @@ export const TasksSection: React.FC<Props> = ({ title, tasks }) => {
 }
 
 const Container = styled.section`
-  background-color: rgba(500, 500, 500, 0.4);
+  background-color: #eeeeee;
   display: flex;
   flex-direction: column;
+  padding: 10px 5px;
+  border-radius: 4px;
 `
 
 const Header = styled.header`
-  padding: 10px 5px;
+  margin-bottom: 20px;
+  color: #9d9d9d;
+  font-weight: 600;
 `
 
 const Body = styled.div``

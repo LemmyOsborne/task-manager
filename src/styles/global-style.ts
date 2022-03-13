@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
     body {
-        background-color: snow;
+        background-color: white;
         font-size: 14px;
         color: #000;
         margin: 0;
@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
-    * {
+    *, ::after, ::before {
         margin: 0;
         padding: 0;
         outline: none;

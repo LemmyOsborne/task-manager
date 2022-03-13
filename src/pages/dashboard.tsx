@@ -12,18 +12,19 @@ const Dashboard = () => {
         title
         description
         status
+        createdAt
       }
     }
   `
   const { data, loading, error } = useQuery<{ tasks: Task[] }>(allTasks)
 
-  const sections: string[] = ["Todo", "In progress", "Review", "Done"]
+  const sections: string[] = ["TODO", "INPROGRESS", "REVIEW", "DONE"]
 
   return !loading ? (
     <Container>
       {sections.map((section, index) => {
-        let filteredTasks = data ? data.tasks.filter((task) => task.title === section) : []
-        return data && <TasksSection title={section} tasks={filteredTasks} />
+        let filteredTasks = data ? data.tasks.filter((task) => task.status === section) : []
+        return data && <TasksSection key={index} title={section} tasks={filteredTasks} />
       })}
     </Container>
   ) : (
@@ -31,6 +32,11 @@ const Dashboard = () => {
   )
 }
 
-const Container = styled.div``
+const Container = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4, minmax(100px, 250px));
+  column-gap: 20px;
+`
 
 export default Dashboard

@@ -6,7 +6,7 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <Container>
       <Header />
-      <div style={{ marginTop: "60px" }}>{children}</div>
+      <div style={{ marginTop: "100px" }}>{children}</div>
     </Container>
   )
 }
