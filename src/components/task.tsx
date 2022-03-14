@@ -1,15 +1,13 @@
-import { format } from "date-fns"
 import React from "react"
 import styled from "styled-components"
 
-export const TaskComponent: React.FC<Task> = ({ id, title, description, createdAt }) => {
-  return createdAt ? (
+export const TaskComponent: React.FC<Task> = ({ id, title, description }) => {
+  return (
     <Container>
       <h3>{title}</h3>
       <span>{description}</span>
-      <span>{createdAt}</span>
     </Container>
-  ) : null
+  )
 }
 
 const Container = styled.article`

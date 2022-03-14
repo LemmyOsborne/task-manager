@@ -49,37 +49,50 @@ export const AddTaskModal: React.FC<Props> = ({ showModal, setShowModal }) => {
     onCompleted: () => reset(),
   })
 
-  const onSubmit: SubmitHandler<IFormData> = ({ description, status, title }) => {
-    createTask({
-      variables: {
-        title: title,
-        description: description,
-        status: status,
-      },
-    })
+  const onSubmit: SubmitHandler<IFormData> = async ({ description, status, title }) => {
+    try {
+      await createTask({
+        variables: {
+          title: title,
+          description: description,
+          status: status,
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return showModal ? (
     <Overlay>
+      {error && <ServerError>{error.message}</ServerError>}
       <CloseButton onClick={() => setShowModal(false)}>Close</CloseButton>
       <Container>
         <Title>Create Task</Title>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="title">Title</Label>
           <Input id="title" placeholder="Enter title" {...register("title", { required: true })} />
+          {errors.title && <FormError>Title is required.</FormError>}
           <Label htmlFor="description">Description</Label>
           <Input
             id="description"
             placeholder="Enter description"
             {...register("description", { required: true })}
           />
+          {errors.description && <FormError>Description is required.</FormError>}
           <Label htmlFor="status">Status</Label>
           <Select
             id="status"
             placeholder="Choose status"
             {...register("status", { required: true })}
-          />
-          <Button type="submit">Create Task</Button>
+          >
+            {errors.status && <FormError>Status is required.</FormError>}
+            <option>TODO</option>
+            <option>INPROGRESS</option>
+            <option>REVIEW</option>
+            <option>DONE</option>
+          </Select>
+          <Button type="submit">{loading ? "Creating Task..." : "Create Task"}</Button>
         </Form>
       </Container>
     </Overlay>
@@ -166,4 +179,26 @@ const Label = styled.label`
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 10px;
+`
+
+const FormError = styled.span`
+  color: #e45826;
+  font-size: 16px;
+  margin: -10px 0 10px;
+`
+
+const ServerError = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  max-height: fit-content;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f2fa5a;
+  color: #4d77ff;
+  z-index: 100;
+  font-size: 25px;
 `

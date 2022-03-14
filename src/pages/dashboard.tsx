@@ -35,7 +35,7 @@ const Dashboard = () => {
 const Container = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(4, minmax(100px, 250px));
+  grid-template-columns: repeat(4, minmax(100px, 300px));
   column-gap: 20px;
 `
 
